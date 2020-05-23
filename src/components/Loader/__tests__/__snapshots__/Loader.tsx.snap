@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader renders without crashing 1`] = `
+<DocumentFragment>
+  <h1
+    class="app__title"
+  >
+    Loading
+  </h1>
+  <div
+    class="loader__container"
+  >
+    <div
+      class="loader"
+    >
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
+  </div>
+</DocumentFragment>
+`;

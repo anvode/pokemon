@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PokemonList renders without crashing 1`] = `
+<DocumentFragment>
+  <h1
+    class="app__title"
+  >
+    Pokemon List
+  </h1>
+</DocumentFragment>
+`;
