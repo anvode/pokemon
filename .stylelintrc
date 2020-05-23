@@ -1,0 +1,26 @@
+{
+    "extends": "stylelint-config-standard",
+    "plugins": [
+		"stylelint-order"
+	],
+    "defaultSeverity": "warning",
+    "rules": {
+        "order/order": [
+            [
+                "custom-properties",
+                "declarations"
+            ]
+            ,
+			{
+				"disableFix": true
+			}
+		],
+        "order/properties-alphabetical-order": true,
+        "at-rule-no-unknown": [true, {
+            "ignoreAtRules": ["function", "if", "each", "include", "mixin", "extend"]
+        }],
+        "indentation": 4,
+        "max-empty-lines": 1,
+        "string-quotes": "single"
+    }
+}
