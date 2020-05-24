@@ -2,16 +2,12 @@
 
 exports[`Loader renders without crashing 1`] = `
 <DocumentFragment>
-  <h1
-    class="app__title"
-  >
-    Loading
-  </h1>
   <div
     class="loader__container"
   >
     <div
       class="loader"
+      data-testid="loader"
     >
       <div />
       <div />
