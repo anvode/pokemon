@@ -2,10 +2,18 @@
 
 exports[`PokemonList renders without crashing 1`] = `
 <DocumentFragment>
-  <h1
-    class="app__title"
+  <div
+    class="loader__container"
   >
-    Pokemon List
-  </h1>
+    <div
+      class="loader"
+      data-testid="loader"
+    >
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
+  </div>
 </DocumentFragment>
 `;
