@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders 1`] = `
+<DocumentFragment>
+  <h1
+    class="app__title bg-light p-3 mb-3"
+    data-testid="h1"
+  />
+</DocumentFragment>
+`;
