@@ -24,7 +24,7 @@ describe('PokemonList', () => {
 
         expect(fetch).toHaveBeenCalledTimes(1);
         expect(fetch).toHaveBeenCalledWith(
-            'https://pokeapi.co/api/v2/pokemon?offset=0&limit=30'
+            'https://pokeapi.co/api/v2/pokemon?offset=0&limit=39'
         );
     });
 

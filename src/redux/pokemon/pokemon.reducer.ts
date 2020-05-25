@@ -8,7 +8,7 @@ export const initialState: PokemonState = {
     next: null,
     previous: null,
     offset: 0,
-    limit: 50,
+    limit: 39,
     count: 0
 };
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Loader from '../Loader/Loader';
 import { RootState } from '../../redux/root-reducer';
@@ -9,15 +10,22 @@ import PokemonItem from './PokemonItem';
 import Title from '../Title/Title';
 
 import './PokemonList.scss';
+import Pagination from '../Pagination/Pagination';
 
 export interface PokemonListProps {}
+
 const PokemonList: React.FC<PokemonListProps> = () => {
-    const { pokemonFetchLoading, pokemonFetchError, pokemonList} = useSelector((state: RootState) => state.pokemon);
+    const { pokemonFetchLoading, pokemonFetchError, pokemonList, limit, offset} = useSelector((state: RootState) => state.pokemon);
     const dispatch = useDispatch();
-    
+    const history = useHistory();
+
     useEffect(() => {
-        pokemonList.length === 0 && dispatch(fetchPokemon(0, 30));
-    }, [pokemonList.length, dispatch]);
+        const query = new URLSearchParams(history.location.search);
+        const currentPage = query.get('page');
+        const newOffset = currentPage ? limit * (+currentPage - 1) : 0;
+        dispatch(fetchPokemon(newOffset, limit));
+        
+    }, [history.location.search]);
 
     if (pokemonFetchError) {
         return <div>
@@ -37,6 +45,7 @@ const PokemonList: React.FC<PokemonListProps> = () => {
             ))}
          
         </div>
+        <Pagination></Pagination>
     </>;
 };
 

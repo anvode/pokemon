@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import { capitalize } from '../../Helpers';
-
+import placeholder from '../../assets/not.png';
 export interface PokemonItemProps {
     name: string;
     url: string
@@ -38,6 +38,10 @@ const PokemonItem: React.FC<PokemonItemProps> = ({ name, url }) => {
                             src={imageUrl}
                             alt={name}
                             onLoad={() => setImageLoading(false)}
+                            onError={() => {
+                                setImageLoading(false);
+                                setImageUrl(placeholder);
+                            }}
                             style={
                                 imageLoading
                                     ? { display: 'none' }
