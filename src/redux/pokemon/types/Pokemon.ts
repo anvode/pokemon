@@ -7,7 +7,6 @@ export interface PokemonState {
     offset: number;
     limit: number;
     count: number;
-    title: string;
 }
 
 export interface PokemonItem {

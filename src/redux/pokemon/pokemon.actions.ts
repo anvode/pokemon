@@ -1,5 +1,5 @@
 import { PokemonItem } from './types/Pokemon';
-import { POKEMON_FETCH, POKEMON_FETCH_LOADING, POKEMON_FETCH_ERROR, POKEMON_SET_TITLE, PokemonActionTypes } from './types/actions';
+import { POKEMON_FETCH, POKEMON_FETCH_LOADING, POKEMON_FETCH_ERROR, PokemonActionTypes } from './types/actions';
 
 export const setPokemonAction = (pokemonList: PokemonItem[], next: string | null, previous: string | null, offset: number, limit: number, count: number): PokemonActionTypes => {
     return {
@@ -29,16 +29,6 @@ export const setPokemonFetchLoadingAction = (loading: boolean): PokemonActionTyp
         type: POKEMON_FETCH_LOADING,
         payload: {
             loading: loading 
-        }
-
-    };
-};
-
-export const setTitleAction = (title: string): PokemonActionTypes => {
-    return {
-        type: POKEMON_SET_TITLE,
-        payload: {
-            title: title 
         }
 
     };

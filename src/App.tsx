@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import PokemonList from './components/PokemonList';
 import PokemonDetail from './components/PokemonDetail';
 import NotFound from './components/NotFound/NotFound';
-import Title from './components/Title/Title';
 
 import './App.scss';
 
@@ -12,7 +11,6 @@ function App() {
     
     return (
         <>
-            <Title></Title>
             <div className="app">
                 <div className="container-xl pb-4">
                     <Switch>

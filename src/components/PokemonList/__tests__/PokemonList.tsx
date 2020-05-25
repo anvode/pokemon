@@ -11,11 +11,11 @@ import PokemonList from '../PokemonList';
 describe('PokemonList', () => {
     afterEach(cleanup);
     beforeEach(() => {
-        fetch.resetMocks();
+        fetchMock.resetMocks();
     });
     
     it('renders without crashing', () => {
-        fetch.mockResponseOnce(JSON.stringify(listResponse));
+        fetchMock.mockResponseOnce(JSON.stringify(listResponse));
 
         const { asFragment } = render(<PokemonList />, {
             wrapper: function child({ children }) {return <Provider store={Store} ><BrowserRouter>{children}</BrowserRouter></Provider>;}
@@ -29,7 +29,7 @@ describe('PokemonList', () => {
     });
 
     it('render correctly', async () => {
-        fetch.mockResponseOnce(JSON.stringify(listResponse));
+        fetchMock.mockResponseOnce(JSON.stringify(listResponse));
         const { getByText } = render(<PokemonList />, {
             wrapper: function child({ children }) {return <Provider store={Store}><BrowserRouter>{children}</BrowserRouter></Provider>;}
         });
@@ -37,6 +37,20 @@ describe('PokemonList', () => {
         const resolvedItem = await waitForElement(() => getByText('Bulbasaur'));
         expect(resolvedItem).toHaveTextContent('Bulbasaur');
 
+    });
+
+    it('inserts text in h1', async () => {
+        fetchMock.mockResponseOnce(JSON.stringify(listResponse));
+            
+        const { getByTestId } = render(<PokemonList />, {
+            wrapper: function child({ children }) {return <Provider store={Store}><BrowserRouter>{children}</BrowserRouter></Provider>;}
+        });
+
+        expect(getByTestId('loader')).toHaveClass('loader');
+
+        const resolvedH1 = await waitForElement(() => getByTestId('h1'));
+        expect(resolvedH1).toHaveTextContent('Pokemon');
+        
     });
 });
 

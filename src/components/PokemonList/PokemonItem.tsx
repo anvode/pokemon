@@ -16,7 +16,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({ name, url }) => {
 
     useEffect(() => {
         setImageUrl(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index}.png`);
-    }, []);
+    }, [index]);
 
     return <>
         <div key={name} className="col-md-4">

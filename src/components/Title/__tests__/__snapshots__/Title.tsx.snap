@@ -5,6 +5,8 @@ exports[`App renders 1`] = `
   <h1
     class="app__title bg-light p-3 mb-3"
     data-testid="h1"
-  />
+  >
+    Title
+  </h1>
 </DocumentFragment>
 `;

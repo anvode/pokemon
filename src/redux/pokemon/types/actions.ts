@@ -3,7 +3,6 @@ import { PokemonItem } from './Pokemon';
 export const POKEMON_FETCH = 'POKEMON_FETCH';
 export const POKEMON_FETCH_LOADING = 'POKEMON_FETCH_LOADING';
 export const POKEMON_FETCH_ERROR = 'POKEMON_FETCH_ERROR';
-export const POKEMON_SET_TITLE = 'POKEMON_SET_TITLE';
 
 export interface SetPokemonAction {
     type: typeof POKEMON_FETCH;
@@ -31,11 +30,4 @@ export interface SetPokemonLoadingAction {
     }
 }
 
-export interface SetTitleAction {
-    type: typeof POKEMON_SET_TITLE;
-    payload: {
-        title: string;
-    }
-}
-
-export type PokemonActionTypes = SetPokemonAction | SetPokemonErrorAction | SetPokemonLoadingAction | SetTitleAction;
+export type PokemonActionTypes = SetPokemonAction | SetPokemonErrorAction | SetPokemonLoadingAction;

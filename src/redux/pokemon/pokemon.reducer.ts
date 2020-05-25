@@ -1,5 +1,5 @@
 import { PokemonState } from './types/Pokemon';
-import { POKEMON_FETCH, POKEMON_FETCH_LOADING, POKEMON_FETCH_ERROR, POKEMON_SET_TITLE, PokemonActionTypes } from './types/actions';
+import { POKEMON_FETCH, POKEMON_FETCH_LOADING, POKEMON_FETCH_ERROR, PokemonActionTypes } from './types/actions';
 
 export const initialState: PokemonState = {
     pokemonFetchLoading: false,
@@ -9,8 +9,7 @@ export const initialState: PokemonState = {
     previous: null,
     offset: 0,
     limit: 50,
-    count: 0,
-    title: ''
+    count: 0
 };
 
 export const pokemonReducer = (state: PokemonState = initialState, action: PokemonActionTypes): PokemonState => {
@@ -40,13 +39,6 @@ export const pokemonReducer = (state: PokemonState = initialState, action: Pokem
             return {
                 ...state,
                 pokemonFetchError: action.payload.error
-            };
-        }
-
-        case POKEMON_SET_TITLE: {
-            return {
-                ...state,
-                title: action.payload.title
             };
         }
 
