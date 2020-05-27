@@ -19,3 +19,12 @@ export const fetchPokemon = (offset: number, limit: number) => {
     };
 };
 
+export const getPaginationOffset = (search: string, limit: number, offset: number, pokemonList: number) => {
+    const query = new URLSearchParams(search);
+    const currentPage = query.get('page');
+    const newOffset = currentPage ? limit * (+currentPage - 1) : 0;
+
+    return {
+        newOffset: pokemonList === 0 || newOffset !== offset ? newOffset : null
+    };
+};
