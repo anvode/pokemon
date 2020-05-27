@@ -2,6 +2,10 @@
 
 ### A simple app using the Pokemon API
 
+`Note`
+
+* There is no need for state Management for small Application like this. Redux used only for Demo purpose
+
 ### Node Version
 
 v12.11.1
