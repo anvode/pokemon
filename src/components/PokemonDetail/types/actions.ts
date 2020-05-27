@@ -15,7 +15,7 @@ export interface SetPokemonDetailAction {
 export interface SetPokemonDetailErrorAction {
     type: typeof POKEMON_DETAIL_ERROR;
     payload: {
-        error: boolean;
+        error: Error | null;
     }
 }
 

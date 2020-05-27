@@ -23,7 +23,7 @@ export const fetchPokemon = async (dispatch: React.Dispatch<PokemonDetailActionT
 
     } catch (err) {
         dispatch(setPokemonDetailLoadingAction(false));
-        dispatch(setPokemonDetailErrorAction(err.message));
+        dispatch(setPokemonDetailErrorAction(err));
     }
 };
 
@@ -51,7 +51,7 @@ export const useFetchEvolutionChain = (id: number) => {
 
             } catch (err) {
                 setLoading(false);
-                setError(err.message);
+                setError(err);
             }
         };
 

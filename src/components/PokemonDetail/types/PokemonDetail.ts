@@ -1,7 +1,7 @@
 
 export interface PokemonDetailState {
     pokemonDetailLoading: boolean;
-    pokemonDetailError: boolean;
+    pokemonDetailError: Error | null;
     pokemonDetail: Pokemon | null;
     id: number | null
 }

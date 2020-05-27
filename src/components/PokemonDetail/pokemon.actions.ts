@@ -12,7 +12,7 @@ export const SetPokemonDetailAction = (pokemonDetail: Pokemon, id: number): Poke
     };
 };
 
-export const setPokemonDetailErrorAction = (error: boolean): PokemonDetailActionTypes => {
+export const setPokemonDetailErrorAction = (error: Error | null): PokemonDetailActionTypes => {
     return {
         type: POKEMON_DETAIL_ERROR,
         payload: {
