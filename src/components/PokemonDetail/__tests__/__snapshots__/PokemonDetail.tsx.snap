@@ -2,11 +2,18 @@
 
 exports[`PokemonDetail renders without crashing 1`] = `
 <DocumentFragment>
-  <h1
-    class="app__title bg-light p-3 mb-3"
-    data-testid="h1"
+  <div
+    class="loader__container"
   >
-    Pokemon Detail undefined
-  </h1>
+    <div
+      class="loader"
+      data-testid="loader"
+    >
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
+  </div>
 </DocumentFragment>
 `;

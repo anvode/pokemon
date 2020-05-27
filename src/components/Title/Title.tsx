@@ -7,7 +7,7 @@ export interface TitleProps {
 const Title: React.FC<TitleProps> = ({name}) => {
         
     return <>
-        <h1 data-testid="h1" className="app__title bg-light p-3 mb-3">{name}</h1>
+        <h1 data-testid="h1" className="app__title p-3 mb-3">{name}</h1>
 
     </>;
 };

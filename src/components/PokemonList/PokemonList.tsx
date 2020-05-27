@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import Loader from '../Loader/Loader';
 import { RootState } from '../../redux/root-reducer';
-import { fetchPokemon } from '../../redux/pokemon/pokemon.utils';
+import { fetchPokemon, getPaginationOffset } from '../../redux/pokemon/pokemon.utils';
 import PokemonItem from './PokemonItem';
 import Title from '../Title/Title';
 
@@ -20,10 +20,11 @@ const PokemonList: React.FC<PokemonListProps> = () => {
     const history = useHistory();
 
     useEffect(() => {
-        const query = new URLSearchParams(history.location.search);
-        const currentPage = query.get('page');
-        const newOffset = currentPage ? limit * (+currentPage - 1) : 0;
-        dispatch(fetchPokemon(newOffset, limit));
+        const { newOffset } = getPaginationOffset(history.location.search, limit, offset, pokemonList.length);
+
+        if (newOffset !== null) {
+            dispatch(fetchPokemon(newOffset, limit));
+        } 
         
     }, [history.location.search]);
 
