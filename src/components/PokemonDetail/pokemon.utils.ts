@@ -1,30 +1,59 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 
-import { PokemonDetailActionTypes } from './types/actions';
+import { PokemonDetailState } from './types/PokemonDetail';
+import { pokemonDetailReducer } from './pokemon.reducer';
 import { setPokemonDetailErrorAction, setPokemonDetailLoadingAction, SetPokemonDetailAction } from './pokemon.actions';
 import { Move, Evolution } from './types/PokemonDetail';
 
-export const fetchPokemon = async (dispatch: React.Dispatch<PokemonDetailActionTypes>, id: number) => {
- 
-    dispatch(setPokemonDetailLoadingAction(true));
-    try {
-        const response = await fetch(`${process.env.REACT_APP_POKEMON_API_URL}/${id}`);
+export const initialState: PokemonDetailState = {
+    pokemonDetailLoading: false,
+    pokemonDetailError: false,
+    pokemonDetail: null,
+    id: null
+};
 
-        const {
-            sprites, name, order, abilities, types, stats, species, moves: filterMoves
-        } = await response.json();
-       
-        const moves: Move[] = filterMoves.map((item: {
-            move: Move;
-        }) => item.move);
+export const useFetchPokemon = (id: number) => {
+    const [state, dispatch] = useReducer(pokemonDetailReducer, initialState);
 
-        dispatch(setPokemonDetailLoadingAction(false));
-        dispatch(SetPokemonDetailAction({sprites, name, order, abilities, types, stats, species, moves}, id));
+    useEffect(() => {
+        let controller = new AbortController();
 
-    } catch (err) {
-        dispatch(setPokemonDetailLoadingAction(false));
-        dispatch(setPokemonDetailErrorAction(err));
-    }
+        const fetchData = async () => {
+            dispatch(setPokemonDetailLoadingAction(true));
+            try {
+                const response = await fetch(`${process.env.REACT_APP_POKEMON_API_URL}/${id}`, { signal: controller.signal });
+        
+                const {
+                    sprites, name, order, abilities, types, stats, species, moves: filterMoves
+                } = await response.json();
+               
+                const moves: Move[] = filterMoves.map((item: {
+                    move: Move;
+                }) => item.move);
+        
+                dispatch(setPokemonDetailLoadingAction(false));
+                dispatch(SetPokemonDetailAction({sprites, name, order, abilities, types, stats, species, moves}, id));
+        
+            } catch (err) {
+                if (err.name === 'AbortError') {
+                    console.log('FetchCancel');
+                } else {
+                    dispatch(setPokemonDetailLoadingAction(false));
+                    dispatch(setPokemonDetailErrorAction(err));
+                }
+                
+            }
+        };
+        fetchData();
+
+        return () => {
+            controller.abort();
+        };
+
+    }, [id]);
+
+    return [state];
+   
 };
 
 export const useFetchEvolutionChain = (id: number) => {
@@ -34,14 +63,17 @@ export const useFetchEvolutionChain = (id: number) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        let controller1 = new AbortController();
+        let controller2 = new AbortController();
+
         const fetchData = async () => {
             setLoading(true);
 
             try {
-                const responseSpecies = await fetch(`${process.env.REACT_APP_POKEMON_SPECIES_API_URL}/${id}`);
+                const responseSpecies = await fetch(`${process.env.REACT_APP_POKEMON_SPECIES_API_URL}/${id}`, { signal: controller1.signal });
                 const {evolution_chain} = await responseSpecies.json();
 
-                const responseChain = await fetch(`${evolution_chain.url}`);
+                const responseChain = await fetch(`${evolution_chain.url}`, { signal: controller2.signal });
                 const dataChain = await responseChain.json();   
 
                 const getEvolutionChain = setEvolutionChain(dataChain.chain);
@@ -50,13 +82,20 @@ export const useFetchEvolutionChain = (id: number) => {
                 setChain(getEvolutionChain);
 
             } catch (err) {
-                setLoading(false);
-                setError(err);
+                if (err.name === 'AbortError') {
+                    console.log('FetchCancel');
+                } else {
+                    setLoading(false);
+                    setError(true);
+                }
             }
         };
 
         fetchData();
-
+        return () => {
+            controller1.abort();
+            controller2.abort();
+        };
     }, [id]);
 
     return {

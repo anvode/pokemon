@@ -1,13 +1,10 @@
 
 import * as React from 'react';
-import { useEffect, useReducer } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { PokemonDetailState } from './types/PokemonDetail';
 import './PokemonDetail.scss';
 import Title from '../Title/Title';
-import { pokemonDetailReducer } from './pokemon.reducer';
-import { fetchPokemon } from './pokemon.utils';
+import { useFetchPokemon } from './pokemon.utils';
 import Loader from '../Loader/Loader';
 import { capitalize } from '../../Helpers';
 import PokemonProperties from './PokemonProperties';
@@ -19,21 +16,9 @@ import NotFound from '../NotFound/NotFound';
 
 export interface PokemonDetailProps {}
 
-export const initialState: PokemonDetailState = {
-    pokemonDetailLoading: false,
-    pokemonDetailError: null,
-    pokemonDetail: null,
-    id: null
-};
-
 const PokemonDetail: React.FC<PokemonDetailProps> = (props) => {
-    const [state, dispatch] = useReducer(pokemonDetailReducer, initialState);
     const {id} = useParams();
-
-    useEffect(() => {
-        fetchPokemon(dispatch, id);
-
-    }, [dispatch, id]);
+    const [state] = useFetchPokemon(id);
 
     const {pokemonDetailLoading, pokemonDetailError, pokemonDetail} = state;
     
