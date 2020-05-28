@@ -9,7 +9,6 @@ import { fetchPokemon, getPaginationOffset } from '../../redux/pokemon/pokemon.u
 import PokemonItem from './PokemonItem';
 import Title from '../Title/Title';
 
-import './PokemonList.scss';
 import Pagination from '../Pagination/Pagination';
 
 export interface PokemonListProps {}
@@ -26,7 +25,7 @@ const PokemonList: React.FC<PokemonListProps> = () => {
             dispatch(fetchPokemon(newOffset, limit));
         } 
         
-    }, [history.location.search]);
+    }, [history.location.search, limit, offset, pokemonList.length, dispatch]);
 
     if (pokemonFetchError) {
         return <div>

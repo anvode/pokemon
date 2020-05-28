@@ -5,8 +5,6 @@ import PokemonList from './components/PokemonList';
 import PokemonDetail from './components/PokemonDetail';
 import NotFound from './components/NotFound/NotFound';
 
-import './App.scss';
-
 function App() {
     
     return (

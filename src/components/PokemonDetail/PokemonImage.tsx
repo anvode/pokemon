@@ -13,7 +13,7 @@ const PokemonImage: React.FC<PokemonImageProps> = ({name, url}) => {
     useEffect(() => {
         const image = url ? url : placeholder;
         setImageUrl(image);
-    }, []);
+    }, [url]);
 
     return <>
         <div className="pokemon-detail__image h-100 border align-items-center d-flex justify-content-center">

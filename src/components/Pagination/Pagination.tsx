@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { RootState } from '../../redux/root-reducer';
 
-import './Pagination.scss';
-
 export interface PaginationProps{}
 
 const Pagination: React.FC<PaginationProps> = () => {
