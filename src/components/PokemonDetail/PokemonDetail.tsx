@@ -15,6 +15,7 @@ import PokemonImage from './PokemonImage';
 import PokemonStats from './PokemonStats';
 import PokemonMoves from './PokemonMoves';
 import PokemonEvolutions from './PokemonEvolutions';
+import NotFound from '../NotFound/NotFound';
 
 export interface PokemonDetailProps {}
 
@@ -32,14 +33,14 @@ const PokemonDetail: React.FC<PokemonDetailProps> = (props) => {
     useEffect(() => {
         fetchPokemon(dispatch, id);
 
-    }, []);
+    }, [dispatch, id]);
 
     const {pokemonDetailLoading, pokemonDetailError, pokemonDetail} = state;
     
     if (pokemonDetailError) {
-        return <div>
-            <Title name={'Page Not Found'}></Title>
-        </div>;
+        return <>
+            <NotFound></NotFound>
+        </>;
     }
 
     if (pokemonDetailLoading || pokemonDetail === null) {
