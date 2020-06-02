@@ -76,3 +76,12 @@ export interface Evolution {
     url: string | null
 }
 
+export interface EvolutionChainItem {
+    evolution_details: any[];
+    evolves_to: EvolutionChainItem[];
+    is_baby: boolean;
+    species: {
+        name: string;
+        url: string;
+    }
+}

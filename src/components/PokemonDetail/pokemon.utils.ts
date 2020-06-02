@@ -3,7 +3,7 @@ import { useEffect, useState, useReducer } from 'react';
 import { PokemonDetailState } from './types/PokemonDetail';
 import { pokemonDetailReducer } from './pokemon.reducer';
 import { setPokemonDetailErrorAction, setPokemonDetailLoadingAction, SetPokemonDetailAction } from './pokemon.actions';
-import { Move, Evolution } from './types/PokemonDetail';
+import { Move, Evolution, EvolutionChainItem } from './types/PokemonDetail';
 
 export const initialState: PokemonDetailState = {
     pokemonDetailLoading: false,
@@ -104,13 +104,15 @@ export const useFetchEvolutionChain = (id: number) => {
 
 };
 
-export const setEvolutionChain = (chain: any): Evolution[] | null => {
+export const setEvolutionChain = (chain: EvolutionChainItem): Evolution[] | null => {
+    if (!Object.keys(chain).length) return null;
+
     const evoChain = [];
     let evoData = chain;
     
     do {
         const evoDetails = evoData['evolution_details'] ? evoData['evolution_details'][0] : null;
-    
+        
         evoChain.push({
             'species_name': evoData.species.name,
             'min_level': !evoDetails ? 1 : evoDetails.min_level,
@@ -122,5 +124,5 @@ export const setEvolutionChain = (chain: any): Evolution[] | null => {
 
     } while (!!evoData && Object.prototype.hasOwnProperty.call(evoData, 'evolves_to'));
 
-    return evoChain.length ? evoChain : null;
+    return evoChain;
 };
