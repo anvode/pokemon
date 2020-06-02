@@ -5,8 +5,10 @@ const NotFound: React.FC = () => {
 
     return (
         <div className="not-found">
-            <h1 className="app__title text-center">Page Not Found</h1>
-            <Link className="btn btn-primary mt-4" to={'/'}>Back to Pokemon List</Link>
+            <h1 className="app__title text-center py-3">Page Not Found</h1>
+            <div className="jumbotron text-center">
+                <Link className="btn btn-primary mt-0" to={'/'}>Back to Pokemon List</Link>
+            </div>
 
         </div>
     );
