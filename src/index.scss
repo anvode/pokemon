@@ -1,4 +1,7 @@
 
-$blue: #e83e8c;
+$theme-colors: (
+    'primary': #5c6e58,
+    'info': #f2d349
+);
 
 @import '~bootstrap/scss/bootstrap.scss';
