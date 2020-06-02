@@ -6,16 +6,20 @@ exports[`NotFound renders without crashing 1`] = `
     class="not-found"
   >
     <h1
-      class="app__title text-center"
+      class="app__title text-center py-3"
     >
       Page Not Found
     </h1>
-    <a
-      class="btn btn-primary mt-4"
-      href="/"
+    <div
+      class="jumbotron text-center"
     >
-      Back to Pokemon List
-    </a>
+      <a
+        class="btn btn-primary mt-0"
+        href="/"
+      >
+        Back to Pokemon List
+      </a>
+    </div>
   </div>
 </DocumentFragment>
 `;
