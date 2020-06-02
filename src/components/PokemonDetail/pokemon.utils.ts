@@ -104,12 +104,12 @@ export const useFetchEvolutionChain = (id: number) => {
 
 };
 
-const setEvolutionChain = (chain: any): Evolution[] | null => {
+export const setEvolutionChain = (chain: any): Evolution[] | null => {
     const evoChain = [];
     let evoData = chain;
     
     do {
-        const evoDetails = evoData['evolution_details'][0];
+        const evoDetails = evoData['evolution_details'] ? evoData['evolution_details'][0] : null;
     
         evoChain.push({
             'species_name': evoData.species.name,

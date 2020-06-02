@@ -16,7 +16,6 @@ describe('PokemonDetail', () => {
         await act(async () => {
             const { asFragment } = render(<Provider store={Store} ><BrowserRouter><PokemonDetail /></BrowserRouter></Provider>);
             expect(asFragment()).toMatchSnapshot(); });
-       
     });
 });
 
