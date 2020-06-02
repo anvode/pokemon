@@ -10,6 +10,7 @@ import PokemonItem from './PokemonItem';
 import Title from '../Title/Title';
 
 import Pagination from '../Pagination/Pagination';
+import NotFound from '../NotFound/NotFound';
 
 export interface PokemonListProps {}
 
@@ -21,7 +22,7 @@ const PokemonList: React.FC<PokemonListProps> = () => {
     useEffect(() => {
         const { newOffset } = getPaginationOffset(history.location.search, limit, offset, pokemonList.length);
 
-        if (newOffset !== null) {
+        if (newOffset !== null && !isNaN(newOffset)) {
             dispatch(fetchPokemon(newOffset, limit));
         } 
         
@@ -35,6 +36,10 @@ const PokemonList: React.FC<PokemonListProps> = () => {
 
     if (pokemonFetchLoading) {
         return <Loader></Loader>;
+    }
+
+    if (pokemonList.length === 0) {
+        return <NotFound></NotFound>;
     }
 
     return <>
